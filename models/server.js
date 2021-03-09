@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-
+const { dbConnection } = require('../database/config');
 
 class Server {
 
@@ -8,24 +8,19 @@ class Server {
     this.app = express();
     this.port = process.env.PORT;
     this.usuariosPath = '/api/usuarios';
+    this.conectarDB();  //Conectar a base de datos
+    this.middlewares(); //Middlewares (Funciones que siempre se ejecutan al levantar el servidor)
+    this.routes();      //Levantar las rutas de la aplicacion
+  }
 
-    //Middlewares (Funciones que siempre se van a ejecutar al levantar el servidor)
-    this.middlewares();
-
-    //Rutas de mi aplicacion
-    this.routes();
+  async conectarDB() {
+    await dbConnection();
   }
 
   middlewares() {
-
-    //CORS (npm para controlar de donde se realizan las peticiones)
-    this.app.use(cors());
-
-    //Lectura y parseo del body (peticiones POST, PUT Y DELETE)
-    this.app.use(express.json());
-
-    //Directorio publico (Carpeta que se muestra inicialmente)
-    this.app.use(express.static('public'));
+    this.app.use(cors());                   //CORS (npm para controlar de donde se realizan las peticiones)
+    this.app.use(express.json());           //Lectura y parseo del body (peticiones POST, PUT Y DELETE)
+    this.app.use(express.static('public')); //Directorio publico (Carpeta que se muestra inicialmente)
   }
 
   routes() {
@@ -37,6 +32,5 @@ class Server {
   }
 
 }
-
 
 module.exports = Server;
