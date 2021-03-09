@@ -23,5 +23,5 @@ $ npm install
 To run the app
 
 ```bash
-$ node app.js
+$ npm start
 ```
