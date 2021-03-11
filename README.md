@@ -9,7 +9,7 @@ Before installing, [download and install Node.js](https://nodejs.org/en/download
 ## Instructions
 - Clone the repository
 ```bash
-$ git clone https://github.com/AngeloSalvador7/nodeJS-RESTserver.git
+$ git clone https://github.com/AngeloSalvador7/nodeJS-API.RESTful.git
 ```
 
 ## Run locally
