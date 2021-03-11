@@ -8,6 +8,7 @@ class Server {
     this.app = express();
     this.port = process.env.PORT;
     this.usuariosPath = '/api/usuarios';
+    this.authPath = '/api/auth';
     this.conectarDB();  //Conectar a base de datos
     this.middlewares(); //Middlewares (Funciones que siempre se ejecutan al levantar el servidor)
     this.routes();      //Levantar las rutas de la aplicacion
@@ -24,6 +25,7 @@ class Server {
   }
 
   routes() {
+    this.app.use(this.authPath, require('../routes/auth'));
     this.app.use(this.usuariosPath, require('../routes/usuarios'));
   }
 

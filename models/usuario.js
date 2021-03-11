@@ -32,9 +32,10 @@ const UsuarioSchema = Schema({
   },
 });
 
-//Metodo para sobreescribir el toJSON. (Para no devolver la version y el password del usuario creado exitosamente).
+//Metodo para sobreescribir el toJSON. (Para devolver solo lo deseado cuando se llame al mismo).
 UsuarioSchema.methods.toJSON = function () {
-  const { __v, password, ...usuario } = this.toObject();
+  const { __v, password, _id, ...usuario } = this.toObject();
+  usuario.uid = _id;
   return usuario;
 }
 
